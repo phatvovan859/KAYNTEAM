@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Viáº¿t Code vÃ  LÆ°u Files</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/javascript/javascript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+    <h1>Trang Viáº¿t Code vÃ  LÆ°u Files</h1>
+
+    <textarea id="editor">// Viáº¿t code cá»§a báº¡n á» ÄÃ¢y</textarea>
+
+    <button onclick="saveCode()">LÆ°u File</button>
+    <button onclick="downloadCode()">Táº£i File</button>
+
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+            lineNumbers: true,
+            mode: "javascript",
+        });
+
+        function saveCode() {
+            var code = editor.getValue();
+            var blob = new Blob([code], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, "your-filename.txt");
+        }
+
+        function downloadCode() {
+            var code = editor.getValue();
+            var blob = new Blob([code], { type: "text/plain;charset=utf-8" });
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = "your-filename.txt";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
